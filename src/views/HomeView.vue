@@ -1,18 +1,29 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Greeting></Greeting>
+    <p v-if="isLoggedIn">Successful! You are Logged In</p>
+    <p v-else>Invalid Try</p>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Greeting from '../components/Greeting.vue'
+import { Computed } from 'vuex';
+import { useAuth } from '@/composable/auth';
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    Greeting
+  },
+  setup(){
+    const {isLoggedIn} = useAuth()
+
+    return{
+      isLoggedIn
+    }
   }
 }
+
 </script>
